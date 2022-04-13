@@ -2,8 +2,8 @@ const { Router } = require("express");
 const { Diet } = require("../db");
 const router = Router();
 
-router.get("/", async (res, next) => {
-  const dietList = [
+router.get("/", async (req, res, next) => {
+  var apiDiets = [
     "gluten free",
     "dairy free",
     "ketogenic",
@@ -18,18 +18,18 @@ router.get("/", async (res, next) => {
     "fodmap friendly",
     "whole 30",
   ];
-
   try {
-    dietList.forEach((elem) => {
-      Diet.findOrCreate({
-        where: { name: elem },
+    apiDiets.forEach(async (diet) => {
+      await Diet.findOrCreate({
+        where: {
+          name: diet,
+        },
       });
     });
-
-    const allTypes = await Diet.findAll();
-    res.send(allTypes);
-  } catch (err) {
-    next(err);
+    const dbDiets = await Diet.findAll();
+    res.status(200).send(dbDiets);
+  } catch (error) {
+    next(error);
   }
 });
 

@@ -8,12 +8,23 @@ const router = Router();
 const getApiRecipes = async () => {
   try {
     const getApi = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=90909f927ead4070a8f19d2a49a06bab&addRecipeInformation=true&number=10`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`
     );
     const recipes = getApi.data?.results.map((elem) => {
       return {
         id: elem.id,
-        title: elem.title,
+        name: elem.title,
+        image: elem.image,
+        rating: elem.spoonacularScore,
+        dishTypes: elem.dishTypes.map((d) => {
+          return { name: d };
+        }),
+        diets: elem.diets.map((d) => {
+          return { name: d };
+        }),
+        summary: elem.summary,
+        healthScore: elem.healthScore,
+        steps: elem.analyzedInstructions,
       };
     });
     return recipes;
@@ -50,18 +61,24 @@ const getAllRecipes = async () => {
 };
 
 router.get("/", async (req, res) => {
-  const name = req.query.name;
-  const allRecipes = await getAllRecipes();
+  const { name } = req.query;
+  let allRecipes = await getAllRecipes();
 
-  if (name) {
-    let recipesName = allRecipes.filter((e) =>
-      e.name.toLowerCase().includes(name.toLowerCase())
-    );
-    recipesName.length
-      ? res.status(200).send(recipesName)
-      : res.status(404).send("Error al obtener por nombre");
-  } else {
-    res.status(200).send(allRecipes);
+  try {
+    if (!name) {
+      res.send(allRecipes);
+    } else {
+      let recipeName = await allRecipes.filter((r) =>
+        r.name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (recipeName.length === 0) {
+        res.send([]);
+      } else {
+        res.status(200).send(recipeName);
+      }
+    }
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 
@@ -89,7 +106,7 @@ router.post("/", async (req, res, next) => {
       image,
     });
 
-    if (name && score && resume && steps && health) {
+    if (name && summary && rating && health && steps) {
       const diet = await Diet.findAll({ where: { name: diets } });
       recipeCreate.addDiets(diet);
       res.status(200).send({ msg: "Se crearon los recipientes" });
