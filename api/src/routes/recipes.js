@@ -1,117 +1,62 @@
 const { Router } = require("express");
 const { Recipe, Diet } = require("../db");
-const axios = require("axios");
-const { API_KEY } = process.env;
-
+const getAllRecipes = require("../controllers/controller");
 const router = Router();
 
-const getApiRecipes = async () => {
+router.get("/", async (req, res, next) => {
   try {
-    const getApi = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`
-    );
-    const recipes = getApi.data?.results.map((elem) => {
-      return {
-        id: elem.id,
-        name: elem.title,
-        image: elem.image,
-        rating: elem.spoonacularScore,
-        dishTypes: elem.dishTypes.map((d) => {
-          return { name: d };
-        }),
-        diets: elem.diets.map((d) => {
-          return { name: d };
-        }),
-        summary: elem.summary,
-        healthScore: elem.healthScore,
-        steps: elem.analyzedInstructions,
-      };
-    });
-    return recipes;
-  } catch (err) {
-    console.log("Error en getApiRecipes: ", err);
-  }
-};
-
-const getDbRecipes = async () => {
-  try {
-    return await Recipe.findAll({
-      include: {
-        model: Diet,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
-      },
-    });
-  } catch (err) {
-    console.log("Error en getDbRecipes: ", err);
-  }
-};
-
-const getAllRecipes = async () => {
-  try {
-    const api = await getApiRecipes();
-    const db = await getDbRecipes();
-    const allRecipes = api.concat(db);
-    return allRecipes;
-  } catch (err) {
-    console.log("Error en getAllRecipes: ", err);
-  }
-};
-
-router.get("/", async (req, res) => {
-  const { name } = req.query;
-  let allRecipes = await getAllRecipes();
-
-  try {
+    const { name } = req.query;
+    const allRecipes = await getAllRecipes();
     if (!name) {
       res.send(allRecipes);
     } else {
-      let recipeName = await allRecipes.filter((r) =>
-        r.name.toLowerCase().includes(name.toLowerCase())
+      let recipe = allRecipes.filter((e) =>
+        e.name.toLowerCase().includes(name.toLowerCase())
       );
-      if (recipeName.length === 0) {
-        res.send([]);
-      } else {
-        res.status(200).send(recipeName);
-      }
+      recipe.length > 0
+        ? res.send(recipe)
+        : res.status(404).send("No se ha encontrado la receta");
     }
   } catch (error) {
-    res.status(404).send(error);
+    next(error);
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const allRecipes = await getAllRecipes();
-  if (id) {
-    let recipeId = allRecipes.filter((e) => e.id == id);
-    recipeId.length
-      ? res.status(200).json(recipeId)
-      : res.status(404).send("Error al obtener por id");
-  }
-});
-
-router.post("/", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const { name, summary, rating, health, steps, image, diets } = req.body;
+    const { id } = req.params;
+    const recipes = await getAllRecipes();
+    if (id) {
+      let recipeId = recipes.filter((e) => e.id === Number(id));
+      recipeId.length > 0
+        ? res.send(recipeId)
+        : res.status(404).send("No se ha encontrado la receta por id");
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
-    const recipeCreate = await Recipe.create({
+router.post("/", async (req, res) => {
+  let { name, image, summary, rating, health, instructions, diets, createdDB } =
+    req.body;
+  try {
+    let recipeC = await Recipe.create({
       name,
+      image,
       summary,
       rating,
       health,
-      steps,
-      image,
+      instructions,
+      createdDB,
     });
 
-    if (name && summary && rating && health && steps) {
-      const diet = await Diet.findAll({ where: { name: diets } });
-      recipeCreate.addDiets(diet);
-      res.status(200).send({ msg: "Se crearon los recipientes" });
+    if (name && summary) {
+      const findDiet = await Diet.findAll({ where: { name: diets } });
+      recipeC.addDiets(findDiet);
+      res.send("Receta creada con éxito");
     } else {
-      res.status(400).send();
+      res.status(404).send("Falta datos");
     }
   } catch (error) {
     next(error);
