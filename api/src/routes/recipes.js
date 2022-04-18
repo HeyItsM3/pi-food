@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
       );
       recipe.length > 0
         ? res.send(recipe)
-        : res.status(404).send("No se ha encontrado la receta");
+        : res.status(404).send("Recipe not found by name");
     }
   } catch (error) {
     next(error);
@@ -29,8 +29,8 @@ router.get("/:id", async (req, res, next) => {
     if (id) {
       let recipeId = recipes.filter((e) => e.id === Number(id));
       recipeId.length > 0
-        ? res.send(recipeId)
-        : res.status(404).send("No se ha encontrado la receta por id");
+        ? res.status(200).send(recipeId)
+        : res.status(404).send("Recipe not found by id");
     }
   } catch (error) {
     next(error);
@@ -54,9 +54,9 @@ router.post("/", async (req, res) => {
     if (name && summary) {
       const findDiet = await Diet.findAll({ where: { name: diets } });
       recipeC.addDiets(findDiet);
-      res.send("Receta creada con éxito");
+      res.send("Recipe successfully created");
     } else {
-      res.status(404).send("Falta datos");
+      res.status(404).send("Missing data");
     }
   } catch (error) {
     next(error);

@@ -4,7 +4,7 @@ const axios = require("axios");
 
 const getApi = async () => {
   const url = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_2}&addRecipeInformation=true&number=2`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=2`
   );
   try {
     const result = url.data.results.map((element) => {
