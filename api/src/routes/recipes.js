@@ -7,6 +7,7 @@ router.get("/", async (req, res, next) => {
   try {
     const { name } = req.query;
     const allRecipes = await getAllRecipes();
+    console.log(allRecipes);
     if (!name) {
       res.send(allRecipes);
     } else {
@@ -27,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const recipes = await getAllRecipes();
     if (id) {
-      let recipeId = recipes.filter((e) => e.id === Number(id));
+      let recipeId = recipes.filter((e) => e.id.toString() === id);
       recipeId.length > 0
         ? res.status(200).send(recipeId)
         : res.status(404).send("Recipe not found by id");

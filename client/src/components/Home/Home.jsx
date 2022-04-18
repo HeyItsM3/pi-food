@@ -4,6 +4,7 @@ import { getRecipes } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
+import Search from "../Card/Search";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const Home = () => {
   return (
     <div>
       <button onClick={handleClick}>All recipes</button>
+      <Search />
       <div>
         {currentRecipes?.map((e) => {
           return (

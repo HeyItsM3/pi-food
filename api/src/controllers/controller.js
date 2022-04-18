@@ -1,10 +1,10 @@
-const { API_KEY, API_KEY_2 } = process.env;
+const { API_KEY, API_KEY_2, API_KEY_3 } = process.env;
 const { Recipe, Diet } = require("../db");
 const axios = require("axios");
 
 const getApi = async () => {
   const url = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=2`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_3}&addRecipeInformation=true&number=2`
   );
   try {
     const result = url.data.results.map((element) => {
@@ -27,11 +27,14 @@ const getApi = async () => {
         }), // - Paso a paso
       };
     });
+
     return result;
   } catch (error) {
-    console.error("Al traer de la api" + error);
+    console.error("Al traer de la api o api agotada" + error);
   }
 };
+
+getApi();
 
 const getDB = async () => {
   try {
