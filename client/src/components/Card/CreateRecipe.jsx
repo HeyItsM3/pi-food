@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { postRecipe, getDiets } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Navigation from "../Nav/Navigation";
 
 const CreateRecipe = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const CreateRecipe = () => {
 
   return (
     <div>
+      <Navigation active={false} />
       <Link to="/home">Go back</Link>
 
       <h1>Create Recipe</h1>

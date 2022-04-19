@@ -4,7 +4,7 @@ import { getRecipes } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
-import Search from "../Card/Search";
+import Navigation from "../Nav/Navigation";
 import Filter from "../Filters/Filter";
 
 const Home = () => {
@@ -45,7 +45,7 @@ const Home = () => {
   return (
     <div>
       <button onClick={handleClick}>All recipes</button>
-      <Search />
+      <Navigation active={true} />
       <Filter
         setCurrentPage={setCurrentPage}
         setRating={setRating}

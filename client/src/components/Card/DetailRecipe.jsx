@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getById } from "../../redux/actions";
 import { sanitize } from "dompurify";
+import Navigation from "../Nav/Navigation";
 
 const DetailRecipe = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const DetailRecipe = () => {
   }, [dispatch, id]);
   return (
     <div>
+      <Navigation active={false} />
       {loader ? (
         <p>Fiding recipe</p>
       ) : (
