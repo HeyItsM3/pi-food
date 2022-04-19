@@ -1,8 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterByDiet, orderByName, orderByRating } from "../../redux/actions";
+import { useEffect } from "react";
+import { getDiets } from "../../redux/actions";
 
 const Filter = ({ setCurrentPage, setRating, setOrder }) => {
+  const Diets = useSelector((state) => state.diets);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDiets());
+  }, [dispatch]);
 
   function handlerFilterByDiet(e) {
     e.preventDefault();
@@ -34,20 +41,10 @@ const Filter = ({ setCurrentPage, setRating, setOrder }) => {
         <option value="low"> Low score </option>
       </select>
       <select onChange={(e) => handlerFilterByDiet(e)}>
-        <option value="All"> All diets</option>
-        <option value="dairy free"> Dairy free</option>
-        <option value="gluten free"> Gluten free</option>
-        <option value="ketogenic"> Ketogenic</option>
-        <option value="lacto ovo vegetarian"> Lacto ovo vegetarian</option>
-        <option value="lacto vegetarian"> Lacto vegetarian</option>
-        <option value="low fodmap"> Low fodmap</option>
-        <option value="ovo vegetarian"> Ovo vegetarian</option>
-        <option value="paleolithic"> Paleolithic</option>
-        <option value="pescetarian"> Pescetarian</option>
-        <option value="primal"> Primal</option>
-        <option value="vegan"> Vegan</option>
-        <option value="vegetarian"> Vegetarian</option>
-        <option value="whole 30"> Whole 30</option>
+        <option value="diet"> Diets</option>
+        {Diets?.map((diet) => {
+          return <option value={diet.name}>{diet.name}</option>;
+        })}
       </select>
     </>
   );
