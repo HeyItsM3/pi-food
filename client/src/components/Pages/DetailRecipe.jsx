@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getById } from "../../redux/actions";
 import { sanitize } from "dompurify";
-import Navigation from "../Nav/Navigation";
+import Navigation from "../Organisms/Navigation";
 
 const DetailRecipe = () => {
   const dispatch = useDispatch();

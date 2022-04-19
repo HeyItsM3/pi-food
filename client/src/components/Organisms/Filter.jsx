@@ -43,7 +43,11 @@ const Filter = ({ setCurrentPage, setRating, setOrder }) => {
       <select onChange={(e) => handlerFilterByDiet(e)}>
         <option value="diet"> Diets</option>
         {Diets?.map((diet) => {
-          return <option value={diet.name}>{diet.name}</option>;
+          return (
+            <option key={diet.id} value={diet.name}>
+              {diet.name}
+            </option>
+          );
         })}
       </select>
     </>

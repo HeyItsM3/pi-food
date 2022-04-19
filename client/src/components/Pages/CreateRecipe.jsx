@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { postRecipe, getDiets } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Navigation from "../Nav/Navigation";
+import Navigation from "../Organisms/Navigation";
 
 const CreateRecipe = () => {
   const dispatch = useDispatch();

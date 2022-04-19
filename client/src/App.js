@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import DetailRecipe from "./components/Card/DetailRecipe";
-import Landing from "./components/Home/Lading";
-import Page404 from "./components/Page404/Page404";
-import CreateRecipe from "./components/Card/CreateRecipe";
+import Home from "./components/Pages/Home";
+import DetailRecipe from "./components/Pages/DetailRecipe";
+import Landing from "./components/Pages/Lading";
+import Page404 from "./components/Pages/Page404";
+import CreateRecipe from "./components/Pages/CreateRecipe";
 function App() {
   return (
     <BrowserRouter>

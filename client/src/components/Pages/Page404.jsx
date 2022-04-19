@@ -1,4 +1,4 @@
-import Navigation from "../Nav/Navigation";
+import Navigation from "../Organisms/Navigation";
 
 const Page404 = () => {
   return (

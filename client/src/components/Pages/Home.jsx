@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipes } from "../../redux/actions";
 import { Link } from "react-router-dom";
-import Card from "../Card/Card";
-import Pagination from "../Pagination/Pagination";
-import Navigation from "../Nav/Navigation";
-import Filter from "../Filters/Filter";
+import Card from "../Organisms/Card";
+import Pagination from "../Organisms/Pagination";
+import Navigation from "../Organisms/Navigation";
+import Filter from "../Organisms/Filter";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
 
   // Loader
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     dispatch(getRecipes());
-    setLoader(true);
-    setTimeout(() => {
-      setLoader(false);
-    }, 1500);
+    // setLoader(true);
+    // setTimeout(() => {
+    //   setLoader(false);
+    // }, 1500);
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
