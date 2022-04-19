@@ -4,8 +4,8 @@ export default function Card({ name, image, diets }) {
   return (
     <>
       <img width="450" src={image ? image : defaultImg} alt="Food" />
-      <h3>Name: {name}</h3>
-      <p>Diets: {diets}</p>
+      <h3>{name}</h3>
+      <p>{diets}</p>
     </>
   );
 }

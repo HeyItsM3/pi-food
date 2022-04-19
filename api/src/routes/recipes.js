@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { Recipe, Diet } = require("../db");
 const getAllRecipes = require("../controllers/controller");
+const { checkName } = require("../constants/diets");
 const router = Router();
 
 router.get("/", async (req, res, next) => {
@@ -11,7 +12,9 @@ router.get("/", async (req, res, next) => {
       res.send(allRecipes);
     } else {
       let recipe = allRecipes.filter((e) =>
-        e.name.toLowerCase().includes(name.toLowerCase())
+        e.name
+          .toLowerCase()
+          .includes(name.toString().toLowerCase() || checkName(e.name, name))
       );
       recipe.length > 0
         ? res.send(recipe)

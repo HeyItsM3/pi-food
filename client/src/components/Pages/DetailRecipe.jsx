@@ -63,28 +63,36 @@ const DetailRecipe = () => {
                   diet.name ? ` ${diet.name} - ` : "No diets were found"
                 )}
               </p>
-              <p>
-                Time:{" "}
-                {detail[0].time
-                  ? detail[0].time + "minutes"
-                  : "the time has not been set"}
-              </p>
+              {detail[0].createdDB === true ? (
+                ""
+              ) : (
+                <p>
+                  Time:{" "}
+                  {detail[0].time
+                    ? detail[0].time + " minutes"
+                    : "the time has not been set"}
+                </p>
+              )}
               <p>
                 Instructions:{" "}
                 {detail[0].instructions
                   ? detail[0].instructions
                   : "No instructions were found"}
               </p>
-              <p>
-                DishTypes:
-                {detail[0].dishTypes
-                  ? detail[0].dishTypes.map((type) =>
-                      type.name
-                        ? ` ${type.name} - `
-                        : "No dish types were found"
-                    )
-                  : " this one has no types"}
-              </p>
+              {detail[0].createdDB === true ? (
+                ""
+              ) : (
+                <p>
+                  DishTypes:
+                  {detail[0].dishTypes
+                    ? detail[0].dishTypes.map((type) =>
+                        type.name
+                          ? ` ${type.name} - `
+                          : "No dish types were found"
+                      )
+                    : " this one has no types"}
+                </p>
+              )}
             </>
           )}
           <Link to="/home">

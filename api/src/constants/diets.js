@@ -14,6 +14,18 @@ let dietList = [
   { name: "low fodmap" },
 ];
 
+let checkName = (name, str) => {
+  let pattern = str
+    .split("")
+    .map((x) => {
+      return `(?=.*${x})`;
+    })
+    .join("");
+  let regex = new RegExp(`${pattern}`, "g");
+  return name.match(regex);
+};
+
 module.exports = {
   dietList,
+  checkName,
 };

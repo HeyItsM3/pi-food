@@ -1,18 +1,43 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postRecipe, getDiets } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../Organisms/Navigation";
 
+function validateInput(inp) {
+  let errors = {};
+
+  if (!inp.name || !/([a-zA-Z])\w+/g.test(inp.name)) {
+    errors.name = "Invalid name";
+  }
+  if (inp.rating < 0 || inp.rating > 100) {
+    errors.rating = "Rating must be between 0 and 100";
+  }
+  if (inp.health < 0 || inp.health > 100) {
+    errors.health = "The health level must be between 0 and 100.";
+  }
+  if (!inp.summary) {
+    errors.summary = "A brief introduction of the dish";
+  }
+
+  // if (!inp.image || !/.*\.(gif|jpe?g|bmp|png)$/gim.test(inp.image)) {
+  //   errors.image = "You need to provide a valid image";
+  // }
+
+  return errors;
+}
+
 const CreateRecipe = () => {
   const dispatch = useDispatch();
   const allDiets = useSelector((state) => state.diets);
-  const [recipe, setRecipe] = useState({
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+  const [input, setRecipe] = useState({
     name: "",
     image: "",
     summary: "",
-    rating: 5,
-    health: 0,
+    rating: 25,
+    health: 25,
     instructions: "",
     diets: [],
   });
@@ -21,58 +46,71 @@ const CreateRecipe = () => {
     dispatch(getDiets());
   }, [dispatch]);
 
-  function handleNameChange(e) {
-    setRecipe({
-      ...recipe,
-      [e.target.name]: e.target.value.replace(/\b\w/g, (l) => l.toUpperCase()),
-    });
-  }
+  // function handleNameChange(e) {
+  //   setRecipe({
+  //     ...recipe,
+  //     [e.target.name]: e.target.value.replace(/\b\w/g, (l) => l.toUpperCase()),
+  //   });
+  // }
 
   function handleChange(e) {
     setRecipe({
-      ...recipe,
+      ...input,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      validateInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
 
   function handleCheckbox(e) {
-    if (e.target.checked && !recipe.diets.includes(e.target.value)) {
+    if (e.target.checked && !input.diets.includes(e.target.value)) {
       setRecipe({
-        ...recipe,
-        diets: [...recipe.diets, e.target.value],
+        ...input,
+        diets: [...input.diets, e.target.value],
       });
     } else {
       setRecipe({
-        ...recipe,
-        diets: recipe.diets.filter((diet) => diet !== e.target.value),
+        ...input,
+        diets: input.diets.filter((diet) => diet !== e.target.value),
       });
     }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    setErrors(validateInput(input));
     if (
-      recipe.name.length > 0 &&
-      recipe.summary.length > 0 &&
-      recipe.instructions.length > 0 &&
-      recipe.rating <= 100 &&
-      recipe.rating >= 1 &&
-      recipe.health <= 100 &&
-      recipe.health >= 1
+      input.name &&
+      input.summary &&
+      input.rating > 0 &&
+      input.rating < 100 &&
+      input.health > 0 &&
+      input.health < 100
     ) {
-      dispatch(postRecipe(recipe));
-      alert("Your recipe has created succesfully");
-      window.location.reload();
+      dispatch(postRecipe(input));
+      alert("Recipe created");
+      navigate("/home");
+      setRecipe({
+        name: "",
+        summary: "",
+        rating: 25,
+        health: 25,
+        instructions: "",
+        image: "",
+        diets: [],
+      });
     } else {
-      alert("Please, check all inputs");
+      alert("You must complete the following fields");
     }
   }
 
   function handleReload() {
-    const result = window.confirm(
-      "You are about to cancel the creation of your recipe"
-    );
-    if (result === true) {
+    const response = window.confirm("Do you want to cancel?");
+    if (response === true) {
       window.location.reload();
     }
   }
@@ -93,9 +131,10 @@ const CreateRecipe = () => {
               placeholder="Recipe name"
               name="name"
               autoComplete="off"
-              value={recipe.name}
-              onChange={handleNameChange}
+              value={input.name}
+              onChange={handleChange}
             />
+            {errors.name && <p style={{ color: "red" }}> {errors.name}</p>}
           </div>
 
           <div>
@@ -105,9 +144,12 @@ const CreateRecipe = () => {
               placeholder="Resume or summary"
               autoComplete="off"
               name="summary"
-              value={recipe.summary}
+              value={input.summary}
               onChange={handleChange}
             />
+            {errors.summary && (
+              <p style={{ color: "red" }}> {errors.summary}</p>
+            )}
           </div>
 
           <div>
@@ -117,19 +159,22 @@ const CreateRecipe = () => {
               min="1"
               max="100"
               name="rating"
-              value={recipe.rating}
+              value={input.rating}
               onChange={handleChange}
             />
-
+            {errors.rating && <p style={{ color: "red" }}> {errors.rating}</p>}
+          </div>
+          <div>
             <label>Health:</label>
             <input
               type="number"
               min="1"
               max="100"
               name="health"
-              value={recipe.health}
+              value={input.health}
               onChange={handleChange}
             />
+            {errors.health && <p style={{ color: "red" }}> {errors.health}</p>}
           </div>
 
           <div>
@@ -139,7 +184,7 @@ const CreateRecipe = () => {
               placeholder="Recipe steps"
               autoComplete="off"
               name="instructions"
-              value={recipe.instructions}
+              value={input.instructions}
               onChange={handleChange}
             />
           </div>
@@ -147,10 +192,11 @@ const CreateRecipe = () => {
             <label>Image here: </label>
             <input
               type="url"
-              value={recipe.image}
+              value={input.image}
               name="image"
               onChange={handleChange}
             />
+            {/* {errors.image && <p style={{ color: "red" }}> {errors.image}</p>} */}
           </div>
           <h2>Diets</h2>
           <div>
@@ -173,7 +219,7 @@ const CreateRecipe = () => {
             </button>
           </div>
         </form>
-        <button onClick={handleReload}>Discard</button>
+        <button onClick={handleReload}>Cancel</button>
       </div>
     </div>
   );
