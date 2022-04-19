@@ -7,7 +7,6 @@ router.get("/", async (req, res, next) => {
   try {
     const { name } = req.query;
     const allRecipes = await getAllRecipes();
-    console.log(allRecipes);
     if (!name) {
       res.send(allRecipes);
     } else {
