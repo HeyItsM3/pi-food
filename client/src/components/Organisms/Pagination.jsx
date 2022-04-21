@@ -1,4 +1,4 @@
-const Pagination = ({ recipesPerPage, allRecipes, paginado }) => {
+const Pagination = ({ recipesPerPage, allRecipes, paginate }) => {
   const pageNumers = [];
 
   for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
@@ -11,7 +11,7 @@ const Pagination = ({ recipesPerPage, allRecipes, paginado }) => {
         {pageNumers &&
           pageNumers.map((number) => (
             <li key={number}>
-              <button onClick={() => paginado(number)}>{number}</button>
+              <button onClick={() => paginate(number)}>{number}</button>
             </li>
           ))}
       </ul>
