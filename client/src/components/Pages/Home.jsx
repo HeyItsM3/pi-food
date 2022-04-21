@@ -32,7 +32,7 @@ const Home = () => {
   const [, setOrder] = useState("");
   const [, setRating] = useState("");
 
-  const paginado = (pageNumber) => {
+  const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
@@ -76,7 +76,7 @@ const Home = () => {
       <Pagination
         recipesPerPage={recipesPerPage}
         allRecipes={allRecipes.length}
-        paginado={paginado}
+        paginate={paginate}
       />
     </div>
   );

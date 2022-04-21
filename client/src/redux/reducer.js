@@ -7,7 +7,7 @@ import {
   FILTER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
-} from "./actions";
+} from "../constants/urls";
 
 const initialState = {
   recipes: [],

@@ -20,6 +20,10 @@ function validateInput(inp) {
     errors.summary = "A brief introduction of the dish";
   }
 
+  if (inp.image.length < 499) {
+    errors.image = "Image length must be less than 499 characters.";
+  }
+
   // if (!inp.image || !/.*\.(gif|jpe?g|bmp|png)$/gim.test(inp.image)) {
   //   errors.image = "You need to provide a valid image";
   // }
@@ -45,13 +49,6 @@ const CreateRecipe = () => {
   useEffect(() => {
     dispatch(getDiets());
   }, [dispatch]);
-
-  // function handleNameChange(e) {
-  //   setRecipe({
-  //     ...recipe,
-  //     [e.target.name]: e.target.value.replace(/\b\w/g, (l) => l.toUpperCase()),
-  //   });
-  // }
 
   function handleChange(e) {
     setRecipe({
@@ -104,7 +101,7 @@ const CreateRecipe = () => {
         diets: [],
       });
     } else {
-      alert("You must complete the following fields");
+      alert("You must complete all the fields");
     }
   }
 
@@ -193,10 +190,11 @@ const CreateRecipe = () => {
             <input
               type="url"
               value={input.image}
+              autoComplete="off"
               name="image"
               onChange={handleChange}
             />
-            {/* {errors.image && <p style={{ color: "red" }}> {errors.image}</p>} */}
+            {errors.image && <p style={{ color: "red" }}> {errors.image}</p>}
           </div>
           <h2>Diets</h2>
           <div>

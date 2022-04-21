@@ -40,7 +40,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   let { name, image, summary, rating, health, instructions, diets, createdDB } =
     req.body;
   try {

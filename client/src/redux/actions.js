@@ -1,12 +1,14 @@
 import axios from "axios";
-export const GET_RECIPES = "GET_RECIPES";
-export const GET_BY_ID = "GET_BY_ID";
-export const SEARCH_RECIPES = "SEARCH_RECIPES";
-export const POST_RECIPE = "POST_RECIPE";
-export const GET_DIETS = "GET_DIETS";
-export const FILTER_BY_DIET = "FILTER_BY_DIET";
-export const ORDER_BY_NAME = "ORDER_BY_NAME";
-export const ORDER_BY_RATING = "ORDER_BY_RATING";
+import {
+  GET_RECIPES,
+  GET_BY_ID,
+  SEARCH_RECIPES,
+  POST_RECIPE,
+  GET_DIETS,
+  FILTER_BY_DIET,
+  ORDER_BY_NAME,
+  ORDER_BY_RATING,
+} from "../constants/urls";
 
 export function getRecipes() {
   return async function (dispatch) {
