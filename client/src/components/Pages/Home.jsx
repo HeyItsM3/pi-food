@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes } from "../../redux/actions";
+import { getRecipes } from "redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../Organisms/Card";
 import Pagination from "../Organisms/Pagination";

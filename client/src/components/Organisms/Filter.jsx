@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { filterByDiet, orderByName, orderByRating } from "../../redux/actions";
 import { useEffect } from "react";
-import { getDiets } from "../../redux/actions";
+import { getDiets } from "redux/actions";
 
 const Filter = ({ setCurrentPage, setRating, setOrder }) => {
   const Diets = useSelector((state) => state.diets);

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./landing.scss";
-import landing from "../../../assets/images/landing2.gif";
+import landing from "assets/images/landing2.gif";
 
 const Landing = () => {
   return (

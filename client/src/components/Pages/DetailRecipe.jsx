@@ -1,4 +1,4 @@
-import defaultImg from "../../assets/images/default.png";
+import defaultImg from "assets/images/default.png";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";

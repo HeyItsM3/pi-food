@@ -1,4 +1,4 @@
-import defaultImg from "../../assets/images/default.png";
+import defaultImg from "assets/images/default.png";
 
 export default function Card({ name, image, diets }) {
   return (
