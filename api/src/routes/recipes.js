@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { Recipe, Diet } = require("../db");
 const getAllRecipes = require("../controllers/controller");
+const { checkName } = require("../constants/diets");
 const router = Router();
 
 router.get("/", async (req, res, next) => {
@@ -11,11 +12,13 @@ router.get("/", async (req, res, next) => {
       res.send(allRecipes);
     } else {
       let recipe = allRecipes.filter((e) =>
-        e.name.toLowerCase().includes(name.toLowerCase())
+        e.name
+          .toLowerCase()
+          .includes(name.toString().toLowerCase() || checkName(e.name, name))
       );
       recipe.length > 0
         ? res.send(recipe)
-        : res.status(404).send("No se ha encontrado la receta");
+        : res.status(404).send("Recipe not found by name");
     }
   } catch (error) {
     next(error);
@@ -27,17 +30,17 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const recipes = await getAllRecipes();
     if (id) {
-      let recipeId = recipes.filter((e) => e.id === Number(id));
+      let recipeId = recipes.filter((e) => e.id.toString() === id);
       recipeId.length > 0
-        ? res.send(recipeId)
-        : res.status(404).send("No se ha encontrado la receta por id");
+        ? res.status(200).send(recipeId)
+        : res.status(404).send("Recipe not found by id");
     }
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   let { name, image, summary, rating, health, instructions, diets, createdDB } =
     req.body;
   try {
@@ -54,9 +57,9 @@ router.post("/", async (req, res) => {
     if (name && summary) {
       const findDiet = await Diet.findAll({ where: { name: diets } });
       recipeC.addDiets(findDiet);
-      res.send("Receta creada con éxito");
+      res.send("Recipe successfully created");
     } else {
-      res.status(404).send("Falta datos");
+      res.status(404).send("Missing data");
     }
   } catch (error) {
     next(error);

@@ -1,4 +1,4 @@
-const { API_KEY, API_KEY_2 } = process.env;
+const { API_KEY, API_KEY_2, API_KEY_3, API_KEY_4 } = process.env;
 const { Recipe, Diet } = require("../db");
 const axios = require("axios");
 
@@ -27,9 +27,10 @@ const getApi = async () => {
         }), // - Paso a paso
       };
     });
+
     return result;
   } catch (error) {
-    console.error("Al traer de la api" + error);
+    console.error("Al traer de la api o api agotada" + error);
   }
 };
 
@@ -59,5 +60,7 @@ const getAllRecipes = async () => {
     console.error("Al obtener todos las recetas " + error);
   }
 };
+
+// const getApiData = require('../constants/getData.json')  const result = data.results.map
 
 module.exports = getAllRecipes;
