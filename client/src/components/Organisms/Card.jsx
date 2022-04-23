@@ -7,7 +7,7 @@ export default function Card({ name, image, diets }) {
         <img src={image ? image : defaultImg} className="cardBg" alt="Food" />
         <div className="cardInfo">
           <h3 className="cardTitle">{name}</h3>
-          <p>{diets}</p>
+          <p className="cardDiet">{diets}</p>
         </div>
       </div>
     </div>

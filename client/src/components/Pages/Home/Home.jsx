@@ -60,7 +60,7 @@ const Home = () => {
               <Navigation active={true} />
             </div>
           </div>
-          <div>
+          <div className="content-filter">
             <div className="card-filter">
               <button onClick={handleClick}>Recipes</button>
               <Filter
@@ -80,7 +80,7 @@ const Home = () => {
                           image={e.image}
                           name={e.name}
                           diets={e.diets.map((diet) =>
-                            diet.name ? `${diet.name} - ` : "No hay dietas"
+                            diet.name ? `${diet.name} ` : "No hay dietas"
                           )}
                         />
                       </Link>

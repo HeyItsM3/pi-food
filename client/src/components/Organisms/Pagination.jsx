@@ -6,16 +6,18 @@ const Pagination = ({ recipesPerPage, allRecipes, paginate }) => {
   }
 
   return (
-    <nav>
-      <ul>
-        {pageNumers &&
-          pageNumers.map((number) => (
-            <li key={number}>
-              <button onClick={() => paginate(number)}>{number}</button>
-            </li>
-          ))}
-      </ul>
-    </nav>
+    <div className="pagination-content">
+      <nav>
+        <ul>
+          {pageNumers &&
+            pageNumers.map((number) => (
+              <li key={number}>
+                <button onClick={() => paginate(number)}>{number}</button>
+              </li>
+            ))}
+        </ul>
+      </nav>
+    </div>
   );
 };
 
