@@ -69,9 +69,9 @@ const Home = () => {
                 setOrder={setOrder}
               />
             </div>
-            <div className="recipes-home">
+            <div className="principal-container">
               {currentRecipes ? (
-                <>
+                <div className="recipes-home">
                   {currentRecipes?.map((e) => {
                     return (
                       <Link to={`/recipe/${e.id}`} key={e.id}>
@@ -86,15 +86,15 @@ const Home = () => {
                       </Link>
                     );
                   })}
-                  <Pagination
-                    recipesPerPage={recipesPerPage}
-                    allRecipes={allRecipes.length}
-                    paginate={paginate}
-                  />
-                </>
+                </div>
               ) : (
                 <Page404 />
               )}
+              <Pagination
+                recipesPerPage={recipesPerPage}
+                allRecipes={allRecipes.length}
+                paginate={paginate}
+              />
             </div>
           </div>
         </div>

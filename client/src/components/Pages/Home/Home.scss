@@ -1,5 +1,3 @@
-
-
 .home-content {
   flex-direction: column;
 }
@@ -33,10 +31,22 @@
   flex-wrap: wrap;
   max-height: 150px;
   justify-content: center;
-  flex-direction: column;
   background-color: #eee;
+  margin: 0% 20%;
   button, select {
     margin-bottom: 1rem;
+    text-align: center;
+  }
+}
+
+
+.principal-container {
+  margin: 0% 20%;
+  .recipes-home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     text-align: center;
   }
 }
