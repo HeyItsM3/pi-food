@@ -54,9 +54,11 @@ const Home = () => {
         <div className="main-content home-content">
           <div className="nav-home">
             <div className="max-content">
-              <div className="logo">
-                <img src={logo} alt="logo" height="40px" />
-              </div>
+              <Link to="/home">
+                <div className="logo">
+                  <img src={logo} alt="logo" height="40px" />
+                </div>
+              </Link>
               <Navigation active={true} />
             </div>
           </div>
