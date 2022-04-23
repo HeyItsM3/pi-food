@@ -3,9 +3,9 @@ import Search from "./Search";
 
 const Navigation = ({ active }) => {
   return (
-    <div>
-      <Link to="/home">Home</Link>
+    <div className="navigation">
       {active ? <Search /> : null}
+      <Link to="/home">Home</Link>
       <Link to="/create">Create</Link>
     </div>
   );

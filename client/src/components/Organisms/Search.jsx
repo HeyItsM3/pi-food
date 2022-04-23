@@ -18,7 +18,7 @@ const Search = () => {
   }
 
   return (
-    <div>
+    <div className="search">
       <input
         value={name}
         type="text"

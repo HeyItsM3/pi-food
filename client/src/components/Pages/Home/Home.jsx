@@ -9,6 +9,7 @@ import Navigation from "../../Organisms/Navigation";
 import Filter from "../../Organisms/Filter";
 import Loader from "../../Organisms/Loader";
 import "./Home.scss";
+import logo from "assets/images/food-logo.png";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Home = () => {
     setLoader(true);
     setTimeout(() => {
       setLoader(false);
-    }, 1300);
+    }, 1700);
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,40 +53,49 @@ const Home = () => {
       ) : (
         <div className="main-content home-content">
           <div className="nav-home">
-            <Navigation active={true} />
-            <button onClick={handleClick}>All recipes</button>
-            <Filter
-              setCurrentPage={setCurrentPage}
-              setRating={setRating}
-              setOrder={setOrder}
-            />
+            <div className="max-content">
+              <div className="logo">
+                <img src={logo} alt="logo" height="40px" />
+              </div>
+              <Navigation active={true} />
+            </div>
           </div>
-          <div className="recipes-home">
-            {currentRecipes ? (
-              <>
-                {currentRecipes?.map((e) => {
-                  return (
-                    <Link to={`/recipe/${e.id}`} key={e.id}>
-                      <Card
-                        key={e.id}
-                        image={e.image}
-                        name={e.name}
-                        diets={e.diets.map((diet) =>
-                          diet.name ? `${diet.name} - ` : "No hay dietas"
-                        )}
-                      />
-                    </Link>
-                  );
-                })}
-                <Pagination
-                  recipesPerPage={recipesPerPage}
-                  allRecipes={allRecipes.length}
-                  paginate={paginate}
-                />
-              </>
-            ) : (
-              <Page404 />
-            )}
+          <div>
+            <div className="card-filter">
+              <button onClick={handleClick}>Recipes</button>
+              <Filter
+                setCurrentPage={setCurrentPage}
+                setRating={setRating}
+                setOrder={setOrder}
+              />
+            </div>
+            <div className="recipes-home">
+              {currentRecipes ? (
+                <>
+                  {currentRecipes?.map((e) => {
+                    return (
+                      <Link to={`/recipe/${e.id}`} key={e.id}>
+                        <Card
+                          key={e.id}
+                          image={e.image}
+                          name={e.name}
+                          diets={e.diets.map((diet) =>
+                            diet.name ? `${diet.name} - ` : "No hay dietas"
+                          )}
+                        />
+                      </Link>
+                    );
+                  })}
+                  <Pagination
+                    recipesPerPage={recipesPerPage}
+                    allRecipes={allRecipes.length}
+                    paginate={paginate}
+                  />
+                </>
+              ) : (
+                <Page404 />
+              )}
+            </div>
           </div>
         </div>
       )}

@@ -10,7 +10,11 @@
   --green-color: #a9b4a4;
 
   /* Fuentes */
-
+  @font-face {
+    font-family: AllWebsite;
+    src: url(/assets/font/Roboto-Light.ttf);
+  }
+  
 
   /* Anchura m�xima del contenido en desktop */
   --max-width: 1200px;
@@ -45,6 +49,7 @@ body {
   min-height: calc(100vh - var(--header-height));
   font-size: var(--normal-font-size);
   line-height: var(--body-line-height);
+  font-family: AllWebsite;
 }
 
 p {
@@ -78,8 +83,26 @@ h4 {
 
 .main-content {
   display: flex;
-  min-height: 100vh;
-  min-width: 100vh;
-  align-items: center;
+  background-color:#e6e4f3ff;
+}
+
+.max-content {
+  display: flex; 
+  max-width: 1200px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+
+
+.loader {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color:#e6e4f3ff;
+}
+
+.cardStyle {
+  background-color:#121f26;
 }
