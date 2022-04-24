@@ -3,7 +3,7 @@ import Home from "./components/Pages/Home/Home";
 import DetailRecipe from "./components/Pages/DetailRecipe";
 import Landing from "./components/Pages/Landing/Lading";
 import Page404 from "./components/Pages/Page404";
-import CreateRecipe from "./components/Pages/CreateRecipe";
+import CreateRecipe from "./components/Pages/Create/CreateRecipe";
 import "./assets/styles/general.scss";
 
 function App() {

@@ -185,3 +185,44 @@ h4 {
 
   }
 }
+
+
+.nav-home {
+  background-color: #3b345a;
+  padding: 1rem 0.5rem;
+  .max-content{
+    .navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      a {
+        margin-left: 1rem;
+        color: #e6e4f3;
+        font-size:var(--big-font-size)
+      }
+  
+      .search {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+        input {
+          padding: .5rem;
+          border-radius: .3rem;
+          border: 1px solid #3b345a;
+        }
+        button {
+          margin-left:.1rem;
+          border-radius: .3rem;
+          border: 1px solid #3b345a;
+          img {
+            width: 100%;
+            max-width: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+  
+}
+

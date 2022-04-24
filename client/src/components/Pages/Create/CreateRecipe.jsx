@@ -1,8 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { postRecipe, getDiets } from "../../redux/actions";
+import { postRecipe, getDiets } from "../../../redux/actions";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Navigation from "../Organisms/Navigation";
+import Navigation from "../../Organisms/Navigation";
+import logo from "assets/images/food-logo.png";
+import create from "assets/images/tick-box.svg";
+import cancel from "assets/images/cancel.svg";
+import "./CreateRecipe.scss";
 
 function validateInput(inp) {
   let errors = {};
@@ -20,8 +24,8 @@ function validateInput(inp) {
     errors.summary = "A brief introduction of the dish";
   }
 
-  if (inp.image.length < 499) {
-    errors.image = "Image length must be less than 499 characters.";
+  if (inp.image.length === 0 || inp.image.length > 499) {
+    errors.image = "Image length must be less than 499 characters";
   }
 
   // if (!inp.image || !/.*\.(gif|jpe?g|bmp|png)$/gim.test(inp.image)) {
@@ -113,16 +117,22 @@ const CreateRecipe = () => {
   }
 
   return (
-    <div>
-      <Navigation active={false} />
-      <Link to="/home">Go back</Link>
-
-      <h1>Create Recipe</h1>
-
-      <div>
-        <form>
-          <div>
-            <label>Name</label>
+    <div className="create-wrapper">
+      <div className="nav-home">
+        <div className="max-content">
+          <Link to="/home">
+            <div className="logo">
+              <img src={logo} alt="logo" height="40px" />
+            </div>
+          </Link>
+          <Navigation active={false} />
+        </div>
+      </div>
+      <div className="create-container">
+        <div className="card-create">
+          <h1>Create Recipe</h1>
+          <form className="form-create">
+            <h4>Name</h4>
             <input
               type="text"
               placeholder="Recipe name"
@@ -132,10 +142,8 @@ const CreateRecipe = () => {
               onChange={handleChange}
             />
             {errors.name && <p style={{ color: "red" }}> {errors.name}</p>}
-          </div>
 
-          <div>
-            <label>Summary</label>
+            <h4>Summary</h4>
             <input
               type="text"
               placeholder="Resume or summary"
@@ -147,10 +155,8 @@ const CreateRecipe = () => {
             {errors.summary && (
               <p style={{ color: "red" }}> {errors.summary}</p>
             )}
-          </div>
 
-          <div>
-            <label>Rating:</label>
+            <h4>Rating</h4>
             <input
               type="number"
               min="1"
@@ -160,9 +166,8 @@ const CreateRecipe = () => {
               onChange={handleChange}
             />
             {errors.rating && <p style={{ color: "red" }}> {errors.rating}</p>}
-          </div>
-          <div>
-            <label>Health:</label>
+
+            <h4>Health</h4>
             <input
               type="number"
               min="1"
@@ -171,11 +176,9 @@ const CreateRecipe = () => {
               value={input.health}
               onChange={handleChange}
             />
-            {errors.health && <p style={{ color: "red" }}> {errors.health}</p>}
-          </div>
+            {errors.health && <p style={{ color: "red" }}>{errors.health}</p>}
 
-          <div>
-            <label>Instructions</label>
+            <h4>Instructions</h4>
             <input
               type="textarea"
               placeholder="Recipe steps"
@@ -184,40 +187,42 @@ const CreateRecipe = () => {
               value={input.instructions}
               onChange={handleChange}
             />
-          </div>
-          <div>
-            <label>Image here: </label>
+
+            <h4>Image</h4>
             <input
-              type="url"
+              type="text"
               value={input.image}
-              autoComplete="off"
               name="image"
               onChange={handleChange}
             />
-            {errors.image && <p style={{ color: "red" }}> {errors.image}</p>}
-          </div>
-          <h2>Diets</h2>
-          <div>
-            {allDiets.map((d) => (
-              <label key={d.id}>
-                <input
-                  onChange={handleCheckbox}
-                  type="checkbox"
-                  name={d.name}
-                  value={d.name}
-                />
-                {d.name}
-              </label>
-            ))}
-          </div>
+            {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
 
-          <div>
-            <button type="submit" onClick={handleSubmit}>
-              Create!
-            </button>
-          </div>
-        </form>
-        <button onClick={handleReload}>Cancel</button>
+            <h4>Diets</h4>
+            {allDiets ? (
+              <div>
+                {allDiets.map((d) => (
+                  <label key={d.id}>
+                    <input
+                      onChange={handleCheckbox}
+                      type="checkbox"
+                      name={d.name}
+                      value={d.name}
+                    />
+                    <p>{d.name}</p>
+                  </label>
+                ))}{" "}
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </form>
+          <button type="submit" onClick={handleSubmit}>
+            <img src={create} alt="create" />
+          </button>
+          <button onClick={handleReload}>
+            <img src={cancel} alt="cancel" />
+          </button>
+        </div>
       </div>
     </div>
   );
