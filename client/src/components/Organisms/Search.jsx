@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchByName } from "../../redux/actions";
+import { searchByName } from "redux/actions";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Search = () => {
   }
 
   return (
-    <div>
+    <div className="search">
       <input
         value={name}
         type="text"

@@ -1,18 +1,23 @@
+@font-face {
+  font-family: landing;
+  src: url(/assets/font/Roboto-Light.ttf);
+}
+
 
 .content-wrapper {
+  font-family: landing;
   margin-left: auto;
   margin-right: auto;
-  background: rgb(52,144,220);
-  background: linear-gradient(180deg, rgba(52,144,220,1) 35%, rgb(136, 185, 224) 100%);
+  background: linear-gradient(180deg, rgb(96 75 211) 35%, rgb(176 169 241) 100%);
   overflow: hidden;
   min-height: 100vh;
   min-width: 100vh;
 }
 
-.container {
+.container-landing {
   display: flex;
   align-items: center;
-  height: 570px;
+  min-height: 100vh;
   justify-content: center;
 }
 
@@ -20,8 +25,34 @@
   background-color: #ffffff;
   text-align: center;
   border-radius: 10px;
+  padding-bottom: 2rem;
+
 
   img {
     margin: 0.5rem 0.5rem 0;
+  }
+  .content {
+    margin-top: -2rem;
+    
+    h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem auto;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 0.5rem auto;
+      padding: 0.75rem 2.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: white;
+      background-color: rgb(96 75 211);
+      border: 1px solid #7d70fc;
+      border-radius: 5rem;
+    } 
+
   }
 }

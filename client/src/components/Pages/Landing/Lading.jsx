@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import "./landing.scss";
-import landing from "../../../assets/images/landing2.gif";
+import landing from "assets/images/landing.gif";
 
 const Landing = () => {
   return (
-    <div className="content-wrapper main">
-      <div className="container">
+    <div className="content-wrapper">
+      <div className="container-landing">
         <div className="card-landing">
           <img src={landing} alt="landing" height="370px" weight="400px" />
-          <h1>Foods</h1>
-          <Link to="/home">
-            <button className="btn">Go</button>
-          </Link>
+          <div className="content">
+            <h1>Food Project</h1>
+            <Link to="/home">
+              <button className="btn">GO</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

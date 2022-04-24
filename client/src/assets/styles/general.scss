@@ -1,0 +1,186 @@
+  /* Fuentes */
+  @font-face {
+    font-family: AllWebsite;
+    src: url(/assets/font/Roboto-Regular.ttf);
+  }
+
+:root {
+  /* Colores */
+  --title-color: #121f26;
+  --text-color: #676f73;
+  --white-color: #ffffff;
+  --dust-color: #b6886a;
+  --bone-color: #e5dad0;
+  --cinnamon-color: #b29a89;
+  --gray-color: #504f4c;
+  --green-color: #a9b4a4;  
+
+  /* Anchura m�xima del contenido en desktop */
+  --max-width: 1200px;
+
+  /* Tama�os */
+  --header-height: 3rem;
+  --section-spacing: 4rem;
+  --block-spacing: 2rem;
+  --body-line-height: 1.6;
+  --title-line-height: 1.3;
+
+  /* Tama�os de fuentes */
+  --h1-font-size: 2rem;
+  --h2-font-size: 1.5rem;
+  --h3-font-size: 1.25rem;
+  --h4-font-size: 1rem;
+  --big-font-size: 1rem;
+  --normal-font-size: 0.875rem;
+  --small-font-size: 0.75rem;
+  --smaller-font-size: 0.6875rem;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: AllWebsite;
+}
+
+body {
+  min-height: calc(100vh - var(--header-height));
+  font-size: var(--normal-font-size);
+  line-height: var(--body-line-height);
+}
+
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  line-height: var(--title-line-height);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+}
+
+h4 {
+  font-size: var(--h4-font-size);
+}
+
+.main-content {
+  display: flex;
+  background-color:#e6e4f3ff;
+}
+
+.max-content {
+  display: flex; 
+  max-width: 1200px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color:#e6e4f3ff;
+}
+
+.wrapper {
+  margin: 1.5rem 0rem;
+  background-color: #eeee;
+  padding: 1rem;
+  border-radius: 1.8rem;
+}
+
+.card {
+  overflow: hidden;
+  position: relative;
+  max-width: 350px;
+  color: #121f26;
+
+  img {
+    border-radius: 1rem;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .cardInfo {
+    .cardDiet {
+      text-transform: capitalize;
+      word-spacing: 0.2rem;
+    }
+  }
+}
+
+.content-filter {
+  margin-top: 1.3rem;
+}
+
+.infoNotFound {
+  font-family: landing;
+  margin-left: auto;
+  margin-right: auto;
+  background: #7a2858ff;
+  overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vh;
+}
+
+.container-404 {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+
+.card-404{
+  background-color: #7a2858ff;
+  text-align: center;
+  border-radius: 10px;
+  padding-bottom: 2rem;
+
+
+  img {
+    margin: 0.5rem 0.5rem 0;
+  }
+  .content {
+    margin-top: -2rem;
+    
+    h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem auto;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 0.5rem auto;
+      padding: 0.75rem 2.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: black;
+      background-color: rgb(255, 255, 255);
+      border: 1px solid #ffffff;
+      border-radius: 5rem;
+    } 
+
+  }
+}
