@@ -9,11 +9,11 @@
   --title-color: #121f26;
   --text-color: #676f73;
   --white-color: #ffffff;
-  --dust-color: #b6886a;
-  --bone-color: #e5dad0;
-  --cinnamon-color: #b29a89;
-  --gray-color: #504f4c;
-  --green-color: #a9b4a4;  
+  // --dust-color: #b6886a;
+  // --bone-color: #e5dad0;
+  // --cinnamon-color: #b29a89;
+  // --gray-color: #504f4c;
+  // --green-color: #a9b4a4;  
 
   /* Anchura m�xima del contenido en desktop */
   --max-width: 1200px;
@@ -83,6 +83,7 @@ h4 {
 .main-content {
   display: flex;
   background-color:#e6e4f3ff;
+  min-height: 100vh;
 }
 
 .max-content {

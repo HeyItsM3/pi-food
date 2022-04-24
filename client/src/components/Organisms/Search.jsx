@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchByName } from "redux/actions";
+import search from "assets/images/search-icon.svg";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Search = () => {
         onChange={(e) => handleInputChange(e)}
       />
       <button type="submit" onClick={(e) => handleSubmit(e)}>
-        Search
+        <img src={search} alt="search" />
       </button>
     </div>
   );
