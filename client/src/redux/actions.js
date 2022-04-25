@@ -10,15 +10,20 @@ import {
   ORDER_BY_RATING,
 } from "../constants/urls";
 
-export function getRecipes() {
-  return async function (dispatch) {
-    let response = await axios.get("http://localhost:3001/recipes");
-    return dispatch({
-      type: GET_RECIPES,
-      payload: response.data,
-    });
-  };
-}
+export const getRecipes = () => (dispatch) => {
+  try {
+    return fetch("http://localhost:3001/recipes")
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_RECIPES,
+          payload: json,
+        });
+      });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export function getById(id) {
   return async function (dispatch) {
@@ -41,7 +46,7 @@ export function searchByName(name) {
         payload: [...response.data],
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
 }
