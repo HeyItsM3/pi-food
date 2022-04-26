@@ -2,7 +2,7 @@ import defaultImg from "assets/images/default.png";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getById } from "../../../redux/actions";
+import { getById, resetDetail } from "../../../redux/actions";
 import { sanitize } from "dompurify";
 import Navigation from "../../Organisms/Navigation";
 import logo from "assets/images/food-logo.png";
@@ -21,6 +21,9 @@ const DetailRecipe = () => {
     setTimeout(() => {
       setLoader(false);
     }, 1500);
+    return () => {
+      dispatch(resetDetail());
+    };
   }, [dispatch, id]);
   return (
     <div className="create-wrapper">

@@ -9,6 +9,7 @@ import {
   FILTER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
+  RESET_DETAIL,
 } from "../constants/urls";
 
 export const getRecipes = () => async (dispatch) => {
@@ -85,7 +86,7 @@ export function searchByName(name) {
         payload: [...response.data],
       });
     } catch (err) {
-      console.log(err.message);
+      alert("Recipe not found");
     }
   };
 }
@@ -108,5 +109,11 @@ export function orderByRating(payload) {
   return {
     type: ORDER_BY_RATING,
     payload,
+  };
+}
+
+export function resetDetail() {
+  return {
+    type: RESET_DETAIL,
   };
 }
