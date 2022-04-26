@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import axios from "axios";
 import {
   GET_RECIPES,
@@ -10,14 +11,46 @@ import {
   ORDER_BY_RATING,
 } from "../constants/urls";
 
-export const getRecipes = () => (dispatch) => {
+export const getRecipes = () => async (dispatch) => {
   try {
-    return fetch("http://localhost:3001/recipes")
+    return await fetch("http://localhost:3001/recipes")
       .then((response) => response.json())
-      .then((json) => {
+      .then((res) => {
         dispatch({
           type: GET_RECIPES,
-          payload: json,
+          payload: [...res],
+        });
+      })
+      .catch((error) => error.message);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getById = (id) => (dispatch) => {
+  try {
+    fetch(`http://localhost:3001/recipes/${id}`)
+      .then((response) => response.json())
+      .then((res) =>
+        dispatch({
+          type: GET_BY_ID,
+          payload: [...res],
+        })
+      )
+      .catch((error) => error.message);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getDiets = () => (dispatch) => {
+  try {
+    fetch("http://localhost:3001/types")
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch({
+          type: GET_DIETS,
+          payload: res,
         });
       });
   } catch (error) {
@@ -25,15 +58,21 @@ export const getRecipes = () => (dispatch) => {
   }
 };
 
-export function getById(id) {
-  return async function (dispatch) {
-    let response = await axios.get(`http://localhost:3001/recipes/${id}`);
-    return dispatch({
-      type: GET_BY_ID,
-      payload: [...response.data],
-    });
-  };
-}
+export const postRecipe = (payload) => async (dispatch) => {
+  try {
+    return await fetch("http://localhost:3001/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(dispatch({ type: POST_RECIPE }))
+      .catch((error) => console.log(error.message));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export function searchByName(name) {
   return async function (dispatch) {
@@ -47,34 +86,6 @@ export function searchByName(name) {
       });
     } catch (err) {
       console.log(err.message);
-    }
-  };
-}
-
-export function postRecipe(payload) {
-  return async function (dispatch) {
-    try {
-      let post = await axios.post("http://localhost:3001/recipes", payload);
-      dispatch({
-        type: POST_RECIPE,
-      });
-      return post;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
-
-export function getDiets() {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get("http://localhost:3001/types");
-      dispatch({
-        type: GET_DIETS,
-        payload: response.data,
-      });
-    } catch (err) {
-      console.log(err);
     }
   };
 }
