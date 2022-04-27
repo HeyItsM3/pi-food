@@ -31,6 +31,7 @@ const DetailRecipe = () => {
       setLoader(false);
     }, 2000);
   }, []);
+
   return (
     <div className="create-wrapper">
       <div className="nav-home">
@@ -91,7 +92,8 @@ const DetailRecipe = () => {
                   <>
                     <h4>Diets</h4>
                     <p>
-                      {detail[0].diets === undefined ? (
+                      {detail[0].diets === undefined ||
+                      detail[0].diets.length === 0 ? (
                         <> no diets were found</>
                       ) : (
                         detail[0].diets.map((diet) => ` ${diet.name} - `)
