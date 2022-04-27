@@ -29,7 +29,6 @@ const getApi = async () => {
         }), // - Paso a paso
       };
     });
-
     return result;
   } catch (error) {
     console.error("Al traer de la api o api agotada" + error);

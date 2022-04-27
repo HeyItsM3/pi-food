@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getById, resetDetail } from "../../../redux/actions";
 import { sanitize } from "dompurify";
+import { useNavigate } from "react-router-dom";
 import Navigation from "../../Organisms/Navigation";
 import logo from "assets/images/food-logo.png";
 import Delivery from "../../Organisms/Delivery";
@@ -11,6 +12,7 @@ import "./Detail.scss";
 
 const DetailRecipe = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const detail = useSelector((state) => state.detail);
   const [loader, setLoader] = useState(false);
@@ -51,9 +53,9 @@ const DetailRecipe = () => {
                   alt="Recipe"
                   width="450"
                 />
-                <Link to="/home">
-                  <button className="btn">Home</button>
-                </Link>
+                <button onClick={() => navigate("/home")} className="btn">
+                  Home
+                </button>
               </div>
               <div className="content-detail">
                 <h2>{detail[0].name}</h2>
@@ -84,7 +86,7 @@ const DetailRecipe = () => {
                 <>
                   <h4>Diets</h4>
                   <p>
-                    {detail.diets === undefined ? (
+                    {detail[0].diets === undefined ? (
                       <> no diets were found</>
                     ) : (
                       detail[0].diets.map((diet) => ` ${diet.name} - `)

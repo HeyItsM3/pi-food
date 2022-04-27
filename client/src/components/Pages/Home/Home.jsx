@@ -23,7 +23,7 @@ const Home = () => {
     setLoader(true);
     setTimeout(() => {
       setLoader(false);
-    }, 1700);
+    }, 1800);
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,6 +96,8 @@ const Home = () => {
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes.length}
                 paginate={paginate}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
               />
             </div>
           </div>
