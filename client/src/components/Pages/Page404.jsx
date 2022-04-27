@@ -10,6 +10,7 @@ const Page404 = () => {
         <div className="card-404">
           <img src={notFound} alt="404" />
           <div className="content">
+            <p>We can't find what you are looking for either :(</p>
             <button className="btn" onClick={() => navigate("/home")}>
               Reload
             </button>

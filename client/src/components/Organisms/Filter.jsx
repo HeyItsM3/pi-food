@@ -3,7 +3,7 @@ import { filterByDiet, orderByName, orderByRating } from "../../redux/actions";
 import { useEffect } from "react";
 import { getDiets } from "redux/actions";
 
-const Filter = ({ setCurrentPage, setRating, setOrder }) => {
+const Filter = ({ setRating, setOrder }) => {
   const Diets = useSelector((state) => state.diets);
   const dispatch = useDispatch();
 
@@ -19,14 +19,12 @@ const Filter = ({ setCurrentPage, setRating, setOrder }) => {
   function handlerOrderByName(e) {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
-    setCurrentPage(1);
     setOrder(`Order ${e.target.value}`);
   }
 
   function handlerOrderByRating(e) {
     e.preventDefault();
     dispatch(orderByRating(e.target.value));
-    setCurrentPage(1);
     setRating(`Ordenado ${e.target.value}`);
   }
 

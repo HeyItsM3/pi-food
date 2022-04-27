@@ -9,7 +9,6 @@ import {
   FILTER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
-  RESET_DETAIL,
 } from "../constants/urls";
 
 export const getRecipes = () => async (dispatch) => {
@@ -87,6 +86,7 @@ export function searchByName(name) {
       });
     } catch (err) {
       alert("Recipe not found");
+      // window.location.replace("/Page404");
     }
   };
 }
@@ -109,11 +109,5 @@ export function orderByRating(payload) {
   return {
     type: ORDER_BY_RATING,
     payload,
-  };
-}
-
-export function resetDetail() {
-  return {
-    type: RESET_DETAIL,
   };
 }

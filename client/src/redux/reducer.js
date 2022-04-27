@@ -12,9 +12,10 @@ import {
 
 const initialState = {
   recipes: [],
-  filterRecipes: [],
+  allRecipes: [],
   detail: [],
   diets: [],
+  filterRecipes: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,7 +24,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.payload,
-        filterRecipes: action.payload,
+        allRecipes: action.payload,
       };
     case GET_BY_ID:
       return {
@@ -45,10 +46,10 @@ const rootReducer = (state = initialState, action) => {
         diets: action.payload,
       };
     case FILTER_BY_DIET:
-      const allRecipes = state.filterRecipes;
+      const allRecipes = state.allRecipes;
       const dietsFilter =
         action.payload === "diet"
-          ? allRecipes
+          ? state.allRecipes
           : allRecipes.filter((recipe) =>
               recipe.diets.find((diet) => {
                 if (diet.name === action.payload) {
@@ -62,41 +63,40 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ORDER_BY_NAME:
-      let orderRecipes =
+      let orderName =
         action.payload === "asc"
-          ? state.filterRecipes.sort(function (a, b) {
-              if (a.name.toLowerCase() > b.name.toLowerCase()) {
+          ? state.recipes.sort(function (a, b) {
+              if (a.name > b.name) {
                 return 1;
               }
-              if (b.name.toLowerCase() > a.name.toLowerCase()) {
+              if (b.name > a.name) {
                 return -1;
               }
               return 0;
             })
-          : state.filterRecipes.sort(function (a, b) {
-              if (a.name.toLowerCase() > b.name.toLowerCase()) {
+          : state.recipes.sort(function (a, b) {
+              if (a.name > b.name) {
                 return -1;
               }
-              if (b.name.toLowerCase() > a.name.toLowerCase()) {
+              if (b.name > a.name) {
                 return 1;
               }
               return 0;
             });
       return {
         ...state,
-        filterRecipes: orderRecipes,
+        recipes: orderName,
       };
 
     case ORDER_BY_RATING:
       let rating =
         action.payload === "high"
-          ? state.filterRecipes.sort(function (a, b) {
+          ? state.recipes.sort(function (a, b) {
               return b.rating - a.rating;
             })
-          : state.filterRecipes.sort(function (a, b) {
+          : state.recipes.sort(function (a, b) {
               return a.rating - b.rating;
             });
-
       return {
         ...state,
         recipes: rating,
