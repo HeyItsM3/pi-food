@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import {
   GET_RECIPES,
   GET_BY_ID,
