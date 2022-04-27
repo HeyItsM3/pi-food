@@ -9,7 +9,7 @@ const agent = session(app);
 const recipe = {
   name: "Choripancho",
   image:
-    "https://imgs.search.brave.com/kdepWwEuURwFvduOUltZiIpOmDDsXLwG4M_wDydXU-8/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzAw/MDMvMTkxNi8wMzgx/L2FydGljbGVzL0No/b3JpX1Bhbi5qcGc_/dj0xNTk2NDk0NzU0",
+    "https://blog.amigofoods.com/wp-content/uploads/2020/08/traditioanl-choripan-argentina.jpg",
   summary: "Choripan hecho con pan de pancho",
   rating: 100,
   health: 100,
