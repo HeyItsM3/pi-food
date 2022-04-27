@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   recipes: [],
-  allRecipes: [],
+  copyRecipes: [],
   detail: [],
   diets: [],
   filterRecipes: [],
@@ -24,7 +24,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.payload,
-        allRecipes: action.payload,
+        copyRecipes: action.payload,
+        // Copia para filter
       };
     case GET_BY_ID:
       return {
@@ -46,11 +47,11 @@ const rootReducer = (state = initialState, action) => {
         diets: action.payload,
       };
     case FILTER_BY_DIET:
-      const allRecipes = state.allRecipes;
+      const filterRecipes = state.copyRecipes;
       const dietsFilter =
         action.payload === "diet"
-          ? state.allRecipes
-          : allRecipes.filter((recipe) =>
+          ? state.copyRecipes
+          : filterRecipes.filter((recipe) =>
               recipe.diets.find((diet) => {
                 if (diet.name === action.payload) {
                   return recipe;
