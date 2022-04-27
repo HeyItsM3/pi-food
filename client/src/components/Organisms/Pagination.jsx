@@ -12,10 +12,6 @@ const Pagination = ({
   for (let i = 0; i < maxQuantity; i++) {
     pageNumber.push(i + 1);
   }
-  // function hide() {
-  //   let result = document.getElementsByClassName("btn-pagination");
-  //   console.log(result);
-  // }
 
   return (
     <div className="pagination-content">
@@ -34,7 +30,12 @@ const Pagination = ({
             {pageNumber &&
               pageNumber.map((number) => (
                 <li key={number}>
-                  <button onClick={() => paginate(number)}>{number}</button>
+                  <button
+                    onClick={() => paginate(number)}
+                    className={currentPage === number ? "current" : null}
+                  >
+                    {number}
+                  </button>
                 </li>
               ))}
             <button
