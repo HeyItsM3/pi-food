@@ -24,14 +24,15 @@ const Filter = ({ setRating, setOrder }) => {
 
   function handlerOrderByRating(e) {
     e.preventDefault();
-    dispatch(orderByRating(e.target.value));
-    setRating(`Ordenado ${e.target.value}`);
+    dispatch(orderByRating(e.target.value)); // dispatch
+    setRating(`Rating ${e.target.value}`); // when i set the page, the local state is modified and rendered
   }
 
   return (
     <>
       <select onChange={(e) => handlerOrderByName(e)}>
-        <option value="asc">A to Z</option>
+        <option value="asc">A to Z</option>{" "}
+        {/* value to be able to send things by payload*/}
         <option value="desc">Z to A</option>
       </select>
       <select onChange={(e) => handlerOrderByRating(e)}>

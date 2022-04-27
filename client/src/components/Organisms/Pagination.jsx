@@ -19,7 +19,7 @@ const Pagination = ({
         <>
           <ul>
             <button
-              disabled={currentPage === 1 || currentPage < 1}
+              disabled={currentPage === 1 || currentPage < 1} //First page
               className="btn-pagination"
               onClick={
                 currentPage !== 1 ? () => setCurrentPage(currentPage - 1) : null
@@ -27,7 +27,7 @@ const Pagination = ({
             >
               &#x2190;
             </button>
-            {pageNumber &&
+            {pageNumber && //render each number
               pageNumber.map((number) => (
                 <li key={number}>
                   <button
@@ -40,7 +40,7 @@ const Pagination = ({
               ))}
             <button
               disabled={
-                maxQuantity === currentPage || maxQuantity < currentPage
+                maxQuantity === currentPage || maxQuantity < currentPage //Last page
               }
               className="btn-pagination"
               onClick={

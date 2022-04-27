@@ -9,6 +9,7 @@ import {
   FILTER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
+  CLEAN_DETAIL,
 } from "../constants/urls";
 
 export const getRecipes = () => async (dispatch) => {
@@ -91,6 +92,7 @@ export function searchByName(name) {
   };
 }
 
+//  the payload in this case means the value="..." (diet)
 export function filterByDiet(payload) {
   return {
     type: FILTER_BY_DIET,
@@ -109,5 +111,11 @@ export function orderByRating(payload) {
   return {
     type: ORDER_BY_RATING,
     payload,
+  };
+}
+
+export function cleanDetail() {
+  return {
+    type: CLEAN_DETAIL,
   };
 }

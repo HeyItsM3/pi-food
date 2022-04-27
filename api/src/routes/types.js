@@ -7,11 +7,12 @@ router.get("/", async (req, res, next) => {
   try {
     dietList?.map((el) => {
       Diet.findOrCreate({
+        // create
         where: { name: el.name },
       });
     });
-    const allTypes = await Diet.findAll();
-    res.status(200).send(allTypes);
+    const allTypes = await Diet.findAll(); // search for
+    res.status(200).send(allTypes); // send all
   } catch (err) {
     next(err);
   }

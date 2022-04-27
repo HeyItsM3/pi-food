@@ -57,12 +57,12 @@ const CreateRecipe = () => {
   function handleChange(e) {
     setRecipe({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value, //the name of each prop, I will fill in the state
     });
     setErrors(
       validateInput({
         ...input,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value, //Validate if its all right
       })
     );
   }

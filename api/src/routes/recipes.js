@@ -30,9 +30,9 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const recipes = await getAllRecipes();
     if (id) {
-      let recipeId = recipes.filter((e) => e.id.toString() === id);
-      recipeId.length > 0
-        ? res.status(200).send(recipeId)
+      let recipeFound = recipes.filter((e) => e.id.toString() === id);
+      recipeFound.length > 0
+        ? res.status(200).send(recipeFound)
         : res.status(404).send("Recipe not found by id");
     }
   } catch (error) {
@@ -55,8 +55,8 @@ router.post("/", async (req, res, next) => {
     });
 
     if (name && summary) {
-      const findDiet = await Diet.findAll({ where: { name: diets } });
-      recipeC.addDiets(findDiet);
+      const findDiet = await Diet.findAll({ where: { name: diets } }); // search for matching diets
+      recipeC.addDiets(findDiet); // add the diets that match
       res.send("Recipe successfully created");
     } else {
       res.status(404).send("Missing data");

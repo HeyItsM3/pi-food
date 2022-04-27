@@ -39,10 +39,10 @@ const getDB = async () => {
   try {
     return await Recipe.findAll({
       include: {
-        model: Diet,
+        model: Diet, // the relationship is generated
         attributes: ["name"],
         through: {
-          attributes: [],
+          attributes: [], //through the attributes
         },
       },
     });
@@ -55,7 +55,7 @@ const getAllRecipes = async () => {
   try {
     const api = await getApi();
     const db = await getDB();
-    const allData = [...api, ...db];
+    const allData = [...api, ...db]; // unites them
     return allData;
   } catch (error) {
     console.error("Al obtener todos las recetas " + error);

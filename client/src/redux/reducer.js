@@ -8,6 +8,7 @@ import {
   FILTER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
+  CLEAN_DETAIL,
 } from "../constants/urls";
 
 const initialState = {
@@ -15,7 +16,6 @@ const initialState = {
   copyRecipes: [],
   detail: [],
   diets: [],
-  filterRecipes: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -64,7 +64,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ORDER_BY_NAME:
-      let orderName =
+      let orderBy =
         action.payload === "asc"
           ? state.recipes.sort(function (a, b) {
               if (a.name > b.name) {
@@ -73,7 +73,7 @@ const rootReducer = (state = initialState, action) => {
               if (b.name > a.name) {
                 return -1;
               }
-              return 0;
+              return 0; //
             })
           : state.recipes.sort(function (a, b) {
               if (a.name > b.name) {
@@ -86,7 +86,7 @@ const rootReducer = (state = initialState, action) => {
             });
       return {
         ...state,
-        recipes: orderName,
+        recipes: orderBy,
       };
 
     case ORDER_BY_RATING:
@@ -101,6 +101,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: rating,
+      };
+
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        detail: [],
       };
 
     default:

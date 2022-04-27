@@ -9,12 +9,12 @@ const Search = () => {
 
   function handleInputChange(e) {
     e.preventDefault();
-    setName(e.target.value);
+    setName(e.target.value); //input value
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(searchByName(name.toLowerCase()));
+    dispatch(searchByName(name.toLowerCase())); //dispatch of the name
     setName("");
   }
 

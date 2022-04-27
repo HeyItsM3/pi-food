@@ -9,5 +9,4 @@ export const GET_DIETS = "GET_DIETS";
 export const FILTER_BY_DIET = "FILTER_BY_DIET";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
-export const REMOVE_FILTERS = "REMOVE_FILTERS";
-export const RESET = "RESET";
+export const CLEAN_DETAIL = "CLEAN_DETAIL";

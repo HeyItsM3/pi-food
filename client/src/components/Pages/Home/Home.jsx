@@ -72,6 +72,13 @@ const Home = () => {
               />
             </div>
             <div className="principal-container">
+              <Pagination
+                recipesPerPage={recipesPerPage}
+                allRecipes={allRecipes.length} //Number
+                paginate={paginate}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
               {currentRecipes ? (
                 <div className="recipes-home">
                   {currentRecipes?.map((e) => {
@@ -92,13 +99,6 @@ const Home = () => {
               ) : (
                 <Page404 />
               )}
-              <Pagination
-                recipesPerPage={recipesPerPage}
-                allRecipes={allRecipes.length}
-                paginate={paginate}
-                setCurrentPage={setCurrentPage}
-                currentPage={currentPage}
-              />
             </div>
           </div>
         </div>
