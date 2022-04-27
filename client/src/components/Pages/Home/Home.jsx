@@ -23,7 +23,7 @@ const Home = () => {
     setLoader(true);
     setTimeout(() => {
       setLoader(false);
-    }, 1800);
+    }, 1900);
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
